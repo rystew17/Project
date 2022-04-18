@@ -25,7 +25,10 @@ st.title('CSE 5544 Project')
 type = st.radio("Include esitmated data?", ("Yes", "No"))
 if type == "Yes":
     option = st.selectbox("Select year", years)
-    st.dataframe(raw[option])
+    bar_chart = alt.Chart().mark_bar().encode(
+    x = countries,
+    y = estimates[option]
+    )
 else:
     option = st.selectbox("Select year", years)
     
