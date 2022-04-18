@@ -31,8 +31,8 @@ if type == "Yes":
         'emission' : filer
     }]
     bar_chart = alt.Chart(data).mark_bar().encode(
-    x = 'country',
-    y = 'emission'
+        x = 'country:O',
+        y = 'emission:Q'
     )
     st.altair_chart(bar_chart)
 else:
