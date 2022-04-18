@@ -26,15 +26,9 @@ type = st.radio("Include esitmated data?", ("Yes", "No"))
 if type == "Yes":
     option = st.selectbox("Select year", years)
     filter = raw[option]
-    data = pd.DataFrame[{
-        'country' : countries,
-        'emission' : filer
-    }]
-    bar_chart = alt.Chart(data).mark_bar().encode(
-        x = 'country:O',
-        y = 'emission:Q'
-    )
-    st.altair_chart(bar_chart)
+    st.dataframe(filter)
+    
+    
 else:
     option = st.selectbox("Select year", years)
     
