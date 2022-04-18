@@ -17,7 +17,8 @@ raw = raw.iloc[:,1:]
 estimated = estimated.iloc[:,1:]
 raw = raw.apply(pd.to_numeric, errors='coerce')
 estimated = estimated.apply(pd.to_numeric, errors='coerce')
-
+st.dataframe(raw)
+st.dataframe(estimated)
 
 
 st.title('CSE 5544 Project')
