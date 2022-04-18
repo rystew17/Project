@@ -27,7 +27,7 @@ if type == "Yes":
     option = st.selectbox("Select year", years)
     bar_chart = alt.Chart().mark_bar().encode(
     x = countries,
-    y = estimates[option]
+    y = estimated[option]
     )
 else:
     option = st.selectbox("Select year", years)
