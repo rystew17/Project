@@ -27,7 +27,7 @@ type = st.radio("Include esitmated data?", ("Yes", "No"))
 if type == "Yes":
     option = st.selectbox("Select year", years)
     fig, ax = plt.subplots(figsize=(14, 6), dpi = 50)
-    ax.bar(countries, estimated[option], capsize = 3)
+    ax.bar(countries, estimated[option])
     ax.set_axisbelow(True)  #ensure the grid is under the graph elements
     ax.margins(x=0.01) #set up the margin of graph
     ax.grid(alpha = 0.3) #show the grid line
