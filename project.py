@@ -21,7 +21,7 @@ estimated = estimated.apply(pd.to_numeric, errors='coerce')
 
 st.title('CSE 5544 Project')
 
-st.radio("Include esitmated data?", ("Yes", "No"))
+type = st.radio("Include esitmated data?", ("Yes", "No"))
 if type == "Yes":
     option = st.selectbox("Select year", years)
 else:
