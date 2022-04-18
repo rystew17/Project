@@ -17,4 +17,6 @@ raw = raw.apply(pd.to_numeric, errors='coerce')
 estimated = estimated.apply(pd.to_numeric, errors='coerce')
 
 st.title('CSE 5544 Project')
-st.data_frame(raw)
+
+st.radio("Include esitmated data?", ("Yes", "No"))
+
