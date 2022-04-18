@@ -10,7 +10,6 @@ raw = pd.read_csv("https://raw.githubusercontent.com/rystew17/Project/main/Raw%2
 
 countries = raw['Country\\year']
 
-
 years = pd.DataFrame({'c1':[1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019]})
 
 raw = raw.iloc[:,2:]
@@ -19,16 +18,17 @@ estimated = estimated.iloc[:,2:]
 raw = raw.apply(pd.to_numeric, errors='coerce')
 estimated = estimated.apply(pd.to_numeric, errors='coerce')
 
+
+st.dataframe(raw)
+
+
+
 st.title('CSE 5544 Project')
 
 type = st.radio("Include esitmated data?", ("Yes", "No"))
 if type == "Yes":
     option = st.selectbox("Select year", years)
-    filter_data = estimated[option]
-    bar_chart = alt.Chart(filter_data).mark_bar().encode(
-    x = countries,
-    y = 'emission:Q'
-)
+    
 else:
     st.write("you selected something else")
 
