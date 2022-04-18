@@ -10,7 +10,7 @@ estimated = pd.read_csv("https://raw.githubusercontent.com/rystew17/Project/main
 raw = pd.read_csv("https://raw.githubusercontent.com/rystew17/Project/main/Raw%20Climate%20Data%20-%20Sheet1.csv")
 
 
-years = pd.DataFrame({'c1':[1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019]})
+years = pd.DataFrame({'c1':['1990','1991','1992','1993','1994','1995','1996','1997','1998','1999','2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018','2019']})
 
 countries = raw['Country\year']
 raw = raw.iloc[:,1:]
@@ -26,6 +26,7 @@ st.title('CSE 5544 Project')
 type = st.radio("Include esitmated data?", ("Yes", "No"))
 if type == "Yes":
     option = st.selectbox("Select year", years)
-    st.write(option)
+    
 else:
-    st.write("you selected something else")
+    option = st.selectbox("Select year", years)
+    
