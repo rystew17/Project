@@ -36,7 +36,6 @@ if type == "Yes":
     ax.set_title('Emissions in selected year')
     xaxis = plt.xticks(rotation=90, ha='center', fontsize=8)
     yaxis = plt.yticks(fontsize=8)
-
-st.pyplot(fig)
+    st.pyplot(fig)
 else:
     st.write("you selected something else")
