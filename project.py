@@ -17,15 +17,13 @@ raw = raw.iloc[:,1:]
 estimated = estimated.iloc[:,1:]
 raw = raw.apply(pd.to_numeric, errors='coerce')
 estimated = estimated.apply(pd.to_numeric, errors='coerce')
-st.dataframe(raw)
-st.dataframe(estimated)
+
 
 
 st.title('CSE 5544 Project')
-
+option = st.selectbox("Select year", years)
 type = st.radio("Include esitmated data?", ("Yes", "No"))
 if type == "Yes":
-    option = st.selectbox("Select year", years)
     filter = estimated[option]
     data = pd.DataFrame({'c1':countries, 'c2':filter})
     bar_chart = alt.Chart(data).mark_bar().encode(
@@ -33,8 +31,12 @@ if type == "Yes":
         y = 'c2'
     )
     st.altair_chart(bar_chart)
-    st.dataframe(data)
-    
 else:
-    option = st.selectbox("Select year", years)
+    filter = raw[option]
+    data = pd.DataFrame({'c1':countries, 'c2':filter})
+    bar_chart = alt.Chart(data).mark_bar().encode(
+        x = 'c1',
+        y = 'c2'
+    )
+    st.altair_chart(bar_chart)
     
