@@ -30,8 +30,8 @@ if type == "Yes":
         x = 'c1',
         y = 'c2'
     ).properties(
-        width=150,
-        height=150
+        width=1500,
+        height=1500
     )
     st.altair_chart(bar_chart)
 else:
@@ -41,8 +41,8 @@ else:
         x = 'c1',
         y = 'c2'
     ).properties(
-        width=150,
-        height=150
+        width=1500,
+        height=1500
     )
     st.altair_chart(bar_chart)
     
