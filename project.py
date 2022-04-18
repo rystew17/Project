@@ -27,8 +27,12 @@ if type == "Yes":
     option = st.selectbox("Select year", years)
     filter = raw[option]
     data = pd.DataFrame({'c1':countries, 'c2':filter})
+    bar_chart = alt.Chart(data).mark_bar().encode(
+        x = 'c1',
+        y = 'c2'
+    )
+    st.altair_chart(bar_chart)
     st.dataframe(data)
-    
     
 else:
     option = st.selectbox("Select year", years)
