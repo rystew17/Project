@@ -21,13 +21,7 @@ estimated = estimated.apply(pd.to_numeric, errors='coerce')
 
 st.dataframe(raw)
 
-chart = alt.Chart(raw).mark_bar().encode(
-    x=countries,
-    y='1990'
-)
-
 st.title('CSE 5544 Project')
-st.altair_chart(chart, use_container_width = True)
 
 type = st.radio("Include esitmated data?", ("Yes", "No"))
 if type == "Yes":
