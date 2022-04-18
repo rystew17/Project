@@ -19,24 +19,14 @@ raw = raw.apply(pd.to_numeric, errors='coerce')
 estimated = estimated.apply(pd.to_numeric, errors='coerce')
 
 
-st.dataframe(raw)
+st.dataframe(raw.iloc['2012'])
 
 st.title('CSE 5544 Project')
 
 type = st.radio("Include esitmated data?", ("Yes", "No"))
 if type == "Yes":
     option = st.selectbox("Select year", years)
-    fig, ax = plt.subplots(figsize=(14, 6), dpi = 50)
-    ax.bar(countries, estimated.iloc[option], capsize = 2)
-    ax.set_axisbelow(True)  #ensure the grid is under the graph elements
-    ax.margins(x=0.01) #set up the margin of graph
-    ax.grid(alpha = 0.3) #show the grid line
-    ax.set_xlabel('country')
-    ax.set_ylabel('emissions')
-    ax.set_title('The mean and std of emissions of countries')
-    xaxis = plt.xticks(rotation=90, ha='center', fontsize=8)
-    yaxis = plt.yticks(fontsize=8)
-    st.pyplot(fig)
+    
 else:
     option = st.selectbox("Select year", years)
     
