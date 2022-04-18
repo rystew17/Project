@@ -26,7 +26,8 @@ type = st.radio("Include esitmated data?", ("Yes", "No"))
 if type == "Yes":
     option = st.selectbox("Select year", years)
     filter = raw[option]
-    st.dataframe(countries)
+    data = pd.DataFrame({'c1':countries, 'c2':filter})
+    st.dataframe(data)
     
     
 else:
