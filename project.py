@@ -25,7 +25,7 @@ chart = alt.Chart(raw).mark_bar().encode(
     y='1990'
 )
 
-st.alt_chart(chart)
+st.altair_chart(chart)
 
 st.title('CSE 5544 Project')
 
