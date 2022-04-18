@@ -29,6 +29,9 @@ if type == "Yes":
     bar_chart = alt.Chart(data).mark_bar().encode(
         x = 'c1',
         y = 'c2'
+    ).properties(
+        width=150,
+        height=150
     )
     st.altair_chart(bar_chart)
 else:
@@ -37,6 +40,9 @@ else:
     bar_chart = alt.Chart(data).mark_bar().encode(
         x = 'c1',
         y = 'c2'
+    ).properties(
+        width=150,
+        height=150
     )
     st.altair_chart(bar_chart)
     
