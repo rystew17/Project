@@ -221,3 +221,4 @@ for ax in grid.axes:
     ax.text(x='2006', y=17000000, s="'05: Kyoto Protocol", horizontalalignment='left', color="indianred")
     ax.text(x='2016', y=16500000, s="'15: Paris \nAccord", horizontalalignment='left', color="indianred")
 
+st.pyplot(grid)
