@@ -9,6 +9,7 @@ estimated = pd.read_csv("https://raw.githubusercontent.com/rystew17/Project/main
 
 raw = pd.read_csv("https://raw.githubusercontent.com/rystew17/Project/main/Raw%20Climate%20Data%20-%20Sheet1.csv")
 
+df_data = pd.DataFrame("https://raw.githubusercontent.com/rystew17/Project/main/CSE5544.Lab1.ClimateData%20-%20Sheet1.csv")
 
 years = pd.DataFrame({'c1':['1990','1991','1992','1993','1994','1995','1996','1997','1998','1999','2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018','2019']})
 
@@ -59,5 +60,133 @@ else:
     st.altair_chart(bar_chart)
     
     
-    
+    df_data.columns = df_data.iloc[0]
+df_data.drop(df_data.index[0], inplace=True)
+
+plt.style.use('seaborn')
+
+#difference in average emission across years for non OECD vs OECD economies 
+#comparison of emission before and after 2015 conference 
+#comparison of emission between big five from UN
+
+df_copy1 = df_data.set_index('Country\year')
+df_copy1.drop( index='OECD - Total', inplace = True)
+df_copy1.drop( index='OECD - Europe', inplace = True)
+df_copy1.reset_index(inplace = True)
+column_names = df_copy1.columns.values
+years = list(column_names)
+years.remove('Country\year')
+years.remove('Non-OECD Economies')
+
+non_oecd_econ = df_copy1[(df_copy1["Non-OECD Economies"].isin(["Yes"]))]
+non_oecd_econ_calc = non_oecd_econ.iloc[:,2:]
+non_oecd_econ_calc = non_oecd_econ_calc.apply(pd.to_numeric, errors='coerce')
+oecd_econ = df_copy1[(df_copy1["Non-OECD Economies"].isin(["No"]))]
+oecd_econ_calc = oecd_econ.iloc[:,2:]
+oecd_econ_calc = oecd_econ_calc.apply(pd.to_numeric, errors='coerce')
+
+all_countries = df_copy1['Country\year']
+statisticsNon = pd.DataFrame({'TOTAL': non_oecd_econ_calc.sum(),'AVERAGE': non_oecd_econ_calc.mean(), 'STN. DEVIATION':non_oecd_econ_calc.std()})
+statistics = pd.DataFrame({'TOTAL': oecd_econ_calc.sum(),'AVERAGE': oecd_econ_calc.mean(), 'STN. DEVIATION':oecd_econ_calc.std()})
+
+five_years_copy = non_oecd_econ[["Country\year","Non-OECD Economies", "2005","2010","2012","2014","2016"]]
+five_years = five_years_copy[["Country\year", "2005","2010","2012","2014","2016"]]
+
+five_years['2005']= five_years['2005'].apply(pd.to_numeric, errors = 'coerce')
+five_years['2010']= five_years['2010'].apply(pd.to_numeric, errors = 'coerce')
+five_years['2012']= five_years['2012'].apply(pd.to_numeric, errors = 'coerce')
+five_years['2014']= five_years['2014'].apply(pd.to_numeric, errors = 'coerce')
+five_years['2016']= five_years['2016'].apply(pd.to_numeric, errors = 'coerce')
+five_years['2005percent'] = (five_years['2005'] / five_years['2005'].sum())*100
+five_years['2010percent'] = (five_years['2010'] / five_years['2010'].sum())*100
+five_years['2012percent'] = (five_years['2012'] / five_years['2012'].sum())*100
+five_years['2014percent'] = (five_years['2014'] / five_years['2014'].sum())*100
+five_years['2016percent'] = (five_years['2016'] / five_years['2016'].sum())*100
+five_years_percent = five_years[["Country\year","2005percent","2010percent","2012percent","2014percent","2016percent"]]
+
+sorted1 = five_years_percent.sort_values(by=['2005percent'], ascending = False)
+sorted1 = sorted1.head(5)[["Country\year","2005percent"]]
+sorted2 = five_years_percent.sort_values(by=['2010percent'], ascending = False)
+sorted2 = sorted2.head(5)[["Country\year","2010percent"]]
+sorted3 = five_years_percent.sort_values(by=['2012percent'], ascending = False)
+sorted3 = sorted3.head(5)[["Country\year","2012percent"]]
+sorted4 = five_years_percent.sort_values(by=['2014percent'], ascending = False)
+sorted4 = sorted4.head(5)[["Country\year","2014percent"]]
+sorted5 = five_years_percent.sort_values(by=['2016percent'], ascending = False)
+sorted5 = sorted5.head(5)[["Country\year","2016percent"]]
+
+continents = ['North America', 'South America','Asia', 'Europe']
+northAmerica = ['OECD America']
+southAmerica = ['Brazil']
+Asia = ['China (People\'s Republic of)', 'Indonesia','India']
+Europe = ['Russia']
+
+value1 = sorted1[(sorted1["Country\\year"].isin(northAmerica))]
+value2 = sorted1[(sorted1["Country\\year"].isin(southAmerica))]
+value3 = sorted1[(sorted1["Country\\year"].isin(Asia))]
+value4 = sorted1[(sorted1["Country\\year"].isin(Europe))]
+
+statisticsAsiaY1 = pd.DataFrame({'TOTAL': value3.sum()})
+statisticsEuropeY1 = pd.DataFrame({'TOTAL': value4.sum()})
+statisticsSAY1 = pd.DataFrame({'TOTAL': value2.sum()})
+statisticsNAY1 = pd.DataFrame({'TOTAL': value1.sum()})
+
+value12 = sorted2[(sorted2["Country\\year"].isin(northAmerica))]
+value22 = sorted2[(sorted2["Country\\year"].isin(southAmerica))]
+value32 = sorted2[(sorted2["Country\\year"].isin(Asia))]
+value42 = sorted2[(sorted2["Country\\year"].isin(Europe))]
+
+statisticsAsiaY2 = pd.DataFrame({'TOTAL': value32.sum()})
+statisticsEuropeY2 = pd.DataFrame({'TOTAL': value42.sum()})
+statisticsSAY2 = pd.DataFrame({'TOTAL': value22.sum()})
+statisticsNAY2 = pd.DataFrame({'TOTAL': value12.sum()})
+
+value13 = sorted3[(sorted3["Country\\year"].isin(northAmerica))]
+value23 = sorted3[(sorted3["Country\\year"].isin(southAmerica))]
+value33 = sorted3[(sorted3["Country\\year"].isin(Asia))]
+value43 = sorted3[(sorted3["Country\\year"].isin(Europe))]
+
+statisticsAsiaY3 = pd.DataFrame({'TOTAL': value33.sum()})
+statisticsEuropeY3 = pd.DataFrame({'TOTAL': value43.sum()})
+statisticsSAY3 = pd.DataFrame({'TOTAL': value23.sum()})
+statisticsNAY3 = pd.DataFrame({'TOTAL': value13.sum()})
+
+value14 = sorted4[(sorted4["Country\\year"].isin(northAmerica))]
+value24 = sorted4[(sorted4["Country\\year"].isin(southAmerica))]
+value34 = sorted4[(sorted4["Country\\year"].isin(Asia))]
+value44 = sorted4[(sorted4["Country\\year"].isin(Europe))]
+
+statisticsAsiaY4 = pd.DataFrame({'TOTAL': value34.sum()})
+statisticsEuropeY4 = pd.DataFrame({'TOTAL': value44.sum()})
+statisticsSAY4 = pd.DataFrame({'TOTAL': value24.sum()})
+statisticsNAY4 = pd.DataFrame({'TOTAL': value14.sum()})
+
+value15 = sorted5[(sorted5["Country\\year"].isin(northAmerica))]
+value25 = sorted5[(sorted5["Country\\year"].isin(southAmerica))]
+value35 = sorted5[(sorted5["Country\\year"].isin(Asia))]
+value45 = sorted5[(sorted5["Country\\year"].isin(Europe))]
+
+statisticsAsiaY5 = pd.DataFrame({'TOTAL': value35.sum()})
+statisticsEuropeY5 = pd.DataFrame({'TOTAL': value45.sum()})
+statisticsSAY5 = pd.DataFrame({'TOTAL': value25.sum()})
+statisticsNAY5 = pd.DataFrame({'TOTAL': value15.sum()})
+
+ContinentsYear1 = [statisticsNAY1.iloc[1,0], statisticsSAY1.iloc[1,0], statisticsAsiaY1.iloc[1,0], statisticsEuropeY1.iloc[1,0] ]
+ContinentsYear2 = [statisticsNAY2.iloc[1,0], statisticsSAY2.iloc[1,0], statisticsAsiaY2.iloc[1,0], statisticsEuropeY2.iloc[1,0] ]
+ContinentsYear3 = [statisticsNAY3.iloc[1,0], statisticsSAY3.iloc[1,0], statisticsAsiaY3.iloc[1,0], statisticsEuropeY3.iloc[1,0] ]
+ContinentsYear4 = [statisticsNAY4.iloc[1,0], statisticsSAY4.iloc[1,0], statisticsAsiaY4.iloc[1,0], statisticsEuropeY4.iloc[1,0] ]
+ContinentsYear5 = [statisticsNAY5.iloc[1,0], statisticsSAY5.iloc[1,0], statisticsAsiaY5.iloc[1,0], statisticsEuropeY5.iloc[1,0] ]
+
+plt.rcParams["figure.figsize"] = [20, 16]
+plt.rcParams["figure.autolayout"] = True
+
+fig, ax = plt.subplots()
+size = 0.3
+colorsForChart = ['#849AE4','#A60A06','#93B581','#652D35'];
+ax.pie(ContinentsYear1, pctdistance=0.9,autopct ='%1.1f%%', colors=colorsForChart,labels=continents,labeldistance = 1, radius=2.2,wedgeprops=dict(width=1.5*size,edgecolor='w'))
+ax.pie(ContinentsYear2, pctdistance=0.85, autopct ='%1.1f%%', colors=colorsForChart, labels=continents,labeldistance = 0.91, radius=2.2-1.5*size, wedgeprops=dict(width=1.5*size, edgecolor='w'))
+ax.pie(ContinentsYear3, pctdistance=0.8, autopct ='%1.1f%%',colors=colorsForChart, labels=continents,labeldistance = 0.87,radius=2.2-3*size, wedgeprops=dict(width=1.5*size, edgecolor='w'))
+ax.pie(ContinentsYear4, pctdistance=0.72, autopct ='%1.1f%%',colors=colorsForChart, labels=continents,labeldistance = 0.82,radius=2.2-4.5*size, wedgeprops=dict(width=1.5*size, edgecolor='w'))
+ax.pie(ContinentsYear5, pctdistance=0.64, autopct ='%1.1f%%',colors=colorsForChart, labels=continents,labeldistance = 0.78,radius=2.2-6*size, wedgeprops=dict(width=1.5*size, edgecolor='w'))
+plt.show()
     
