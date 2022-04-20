@@ -32,7 +32,7 @@ if type == "Yes":
         y = alt.Y('c2', title = 'Emissions'),
         color=alt.condition(
             alt.datum.c3 == 0,  # If the country is "US" this test returns True,
-            alt.value('yellow'),     # highlight a bar with red.
+            alt.value('orange'),     # highlight a bar with red.
             alt.value('green')   # And grey for the rest of the bars
         )
     ).properties(
