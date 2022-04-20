@@ -59,6 +59,9 @@ else:
     
 
 df_data = pd.read_csv("https://raw.githubusercontent.com/rystew17/Project/main/CSE5544.Lab1.ClimateData%20-%20Sheet1.csv")
+
+st.dataframe(df_data)
+
 df_data.columns = df_data.iloc[0]
 df_data.drop(df_data.index[0], inplace=True)
 
@@ -67,7 +70,6 @@ plt.style.use('seaborn')
 #difference in average emission across years for non OECD vs OECD economies 
 #comparison of emission before and after 2015 conference 
 #comparison of emission between big five from UN
-st.dataframe(df_data)
 
 
 df_copy1 = df_data.set_index('Country\year')
