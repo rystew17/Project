@@ -21,7 +21,7 @@ estimated = estimated.apply(pd.to_numeric, errors='coerce')
 
 
 st.title('CSE 5544 Project')
-option = st.selectbox("Select year", years)
+option = st.select_slider("Select year", years)
 type = st.radio("Include esitmated data?", ("Yes", "No"))
 if type == "Yes":
     filter = estimated[option]
