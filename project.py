@@ -179,7 +179,7 @@ plt.rcParams["figure.autolayout"] = True
 
 fig, ax = plt.subplots()
 size = 0.3
-colorsForChart = ['blue','red','green','yellow'];
+colorsForChart = ['blue','purple','green','orange'];
 ax.pie(ContinentsYear1, pctdistance=0.9,autopct ='%1.1f%%', colors=colorsForChart,labels=continents,labeldistance = 1, radius=2.2,wedgeprops=dict(width=1.5*size,edgecolor='w'))
 ax.pie(ContinentsYear2, pctdistance=0.85, autopct ='%1.1f%%', colors=colorsForChart, labels=continents,labeldistance = 0.91, radius=2.2-1.5*size, wedgeprops=dict(width=1.5*size, edgecolor='w'))
 ax.pie(ContinentsYear3, pctdistance=0.8, autopct ='%1.1f%%',colors=colorsForChart, labels=continents,labeldistance = 0.87,radius=2.2-3*size, wedgeprops=dict(width=1.5*size, edgecolor='w'))
