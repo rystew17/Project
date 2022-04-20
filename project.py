@@ -29,7 +29,11 @@ if type == "Yes":
     bar_chart = alt.Chart(data).mark_bar().encode(
         x = alt.X('c1',title = 'Country'),
         y = alt.Y('c2', title = 'Emissions'),
-        color=alt.Color('c2', scale=alt.Scale(scheme='red'))
+        color=alt.condition(
+            alt.datum.raw[option] == 0,  # If the year is 1810 this test returns True,
+            alt.value('orange'),     # which sets the bar orange.
+            alt.value('steelblue')   # And if it's not true it sets the bar steelblue.
+        )
     ).properties(
         width=750,
         height=500
@@ -47,4 +51,6 @@ else:
         height=500
     )
     st.altair_chart(bar_chart)
+    
+  
     
