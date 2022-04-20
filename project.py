@@ -32,7 +32,7 @@ if type == "Yes":
         y = alt.Y('c2', title = 'Emissions'),
         color=alt.condition(
             alt.datum.c3 == 0,
-            alt.value('yellow'),
+            alt.value('red'),
             alt.value('green')
         )
     ).properties(
