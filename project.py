@@ -30,7 +30,7 @@ if type == "Yes":
         x = alt.X('c1',title = 'Country'),
         y = alt.Y('c2', title = 'Emissions')
     ).properties(
-        width=500,
+        width=750,
         height=500
     )
     st.altair_chart(bar_chart)
@@ -41,7 +41,7 @@ else:
         x = alt.X('c1',title='Countries'),
         y = alt.Y('c2',title='Emissions')
     ).properties(
-        width=500,
+        width=750,
         height=500
     )
     st.altair_chart(bar_chart)
