@@ -23,6 +23,7 @@ estimated = estimated.apply(pd.to_numeric, errors='coerce')
 st.title('CSE 5544 Project')
 option = st.select_slider("Select year", years)
 type = st.radio("Include esitmated data?", ("Yes", "No"))
+st.write("Emissions by Country in " + option)
 if type == "Yes":
     filter = estimated[option]
     filter2 = raw[option]
