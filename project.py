@@ -192,6 +192,9 @@ st.pyplot(fig)
 
 df_data2 = pd.read_csv("https://raw.githubusercontent.com/rystew17/Project/main/CSE5544.Lab1.ClimateData%20-%20Sheet1.csv")
 
-data = df_data2.drop(columns=['Non-OECD Economies'])
-                     
+data = df_data2.columns.drop(columns=['Non-OECD Economies'])
+data = pd.melt(data, id_vars=['Country\year'], var_name=['year'])
+data['value'] = data['value'].apply(pd.to_numeric, errors='coerce')
+data = data.rename(columns={'Country\year' : 'Country/Region'})
+
 st.dataframe(data)
