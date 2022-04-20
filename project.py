@@ -70,8 +70,8 @@ plt.style.use('seaborn')
 #comparison of emission between big five from UN
 
 df_copy1 = df_data
-df_copy1.drop('OECD - Total', inplace = True)
-df_copy1.drop('OECD - Europe', inplace = True)
+df_copy1.drop('OECD - Total', axis = 1)
+df_copy1.drop('OECD - Europe', axis = 1)
 df_copy1
 column_names = df_copy1.columns.values
 years = list(column_names)
