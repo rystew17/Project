@@ -65,6 +65,8 @@ st.dataframe(df_data)
 df_data.columns = df_data.iloc[0]
 df_data.drop(df_data.index[0], inplace=True)
 
+st.dataframe(df_data)
+
 plt.style.use('seaborn')
 
 #difference in average emission across years for non OECD vs OECD economies 
