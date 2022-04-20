@@ -32,8 +32,8 @@ if type == "Yes":
         y = alt.Y('c2', title = 'Emissions'),
         color=alt.condition(
             alt.datum.c3 == 0,  # If the country is "US" this test returns True,
-            alt.value('red'),     # highlight a bar with red.
-            alt.value('lightgrey')   # And grey for the rest of the bars
+            alt.value('yellow'),     # highlight a bar with red.
+            alt.value('green')   # And grey for the rest of the bars
         )
     ).properties(
         width=750,
@@ -45,7 +45,12 @@ else:
     data = pd.DataFrame({'c1':countries, 'c2':filter})
     bar_chart = alt.Chart(data).mark_bar().encode(
         x = alt.X('c1',title='Countries'),
-        y = alt.Y('c2',title='Emissions')
+        y = alt.Y('c2',title='Emissions'),
+        color=alt.condition(
+            alt.datum.c2 >= 0,  # If the country is "US" this test returns True,
+            alt.value('green'),     # highlight a bar with red.
+            alt.value('lightgrey')   # And grey for the rest of the bars
+        )
     ).properties(
         width=750,
         height=500
