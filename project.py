@@ -28,7 +28,7 @@ if type == "Yes":
     data = pd.DataFrame({'c1':countries, 'c2':filter})
     bar_chart = alt.Chart(data).mark_bar().encode(
         x = alt.X('c1',title = 'Country'),
-        y = alt.Y('c2', title = 'Emissions')
+        y = alt.Y('c2', title = 'Emissions'),
         color=alt.Color('red')
     ).properties(
         width=750,
@@ -40,7 +40,7 @@ else:
     data = pd.DataFrame({'c1':countries, 'c2':filter})
     bar_chart = alt.Chart(data).mark_bar().encode(
         x = alt.X('c1',title='Countries'),
-        y = alt.Y('c2',title='Emissions')
+        y = alt.Y('c2',title='Emissions'),
         color=alt.Color('red')
     ).properties(
         width=750,
