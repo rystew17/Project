@@ -190,7 +190,47 @@ plt.show()
 st.text("Contributions based on Continents of top 5 emittors during 5 largest emission years ")
 st.pyplot(fig)
 
-data = raw
+df_data = pd.read_csv("https://raw.githubusercontent.com/rystew17/Project/main/CSE5544.Lab1.ClimateData%20-%20Sheet1.csv")
+# make row 0 into the column headers, then drop it
+df_data.columns = df_data.iloc[0]
+df_data.drop(df_data.index[0], inplace=True)
+
+# Convert all year columns to float data type
+cols = df_data.columns.drop(['Country\year', 'Non-OECD Economies'])
+df_data[cols] = df_data[cols].apply(pd.to_numeric, errors = 'coerce')
+
+# Drop Non-OECD Economies column
+data = df_data.drop(columns=['Non-OECD Economies'])
+data = pd.melt(data, id_vars=['Country\year'], var_name=['year'])
+data['value'] = data['value'].apply(pd.to_numeric, errors='coerce')
+data = data.rename(columns={'Country\year' : 'Country/Region'})
+
+
+# Initialize a grid of plots
+grid = sns.FacetGrid(data, col="Country/Region", hue="Country/Region", palette="husl",
+                     col_wrap=9, height=4, aspect=1.5)
+
+# Draw a horizontal line to show the starting point
+grid.refline(y=0, linestyle=":")
+
+# Draw a line plot to show emissions values
+grid.map(plt.plot, "year", "value", marker="o")
+
+grid.set_xticklabels(rotation=90)
+grid.set_ylabels('Greenhouse Gas Emissions \n(millions of tons of CO2)')
+
+# Adjust the arrangement of the plots
+grid.fig.tight_layout(w_pad=1)
+
+grid.refline(x = '1992', color="rosybrown", lw = 2)
+grid.refline(x = '2005', color="rosybrown", lw = 2)
+grid.refline(x = '2015', color="rosybrown", lw = 2)
+
+for ax in grid.axes:
+    ax.text(x='1993', y=17000000, s="'92: UNFCCC", horizontalalignment='left', color="indianred")
+    ax.text(x='2006', y=17000000, s="'05: Kyoto Protocol", horizontalalignment='left', color="indianred")
+    ax.text(x='2016', y=16500000, s="'15: Paris \nAccord", horizontalalignment='left', color="indianred")
+
 
 # Initialize a grid of plots
 grid = sns.FacetGrid(data, col="Country/Region", hue="Country/Region", palette="husl",
