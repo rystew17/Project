@@ -68,6 +68,8 @@ plt.style.use('seaborn')
 #difference in average emission across years for non OECD vs OECD economies 
 #comparison of emission before and after 2015 conference 
 #comparison of emission between big five from UN
+st.DataFrame(df_data)
+
 
 df_copy1 = df_data.set_index('Country\year')
 df_copy1.drop( index='OECD - Total', inplace = True)
