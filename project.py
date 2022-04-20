@@ -189,3 +189,5 @@ ax.pie(ContinentsYear3, pctdistance=0.8, autopct ='%1.1f%%',colors=colorsForChar
 ax.pie(ContinentsYear4, pctdistance=0.72, autopct ='%1.1f%%',colors=colorsForChart, labels=continents,labeldistance = 0.82,radius=2.2-4.5*size, wedgeprops=dict(width=1.5*size, edgecolor='w'))
 ax.pie(ContinentsYear5, pctdistance=0.64, autopct ='%1.1f%%',colors=colorsForChart, labels=continents,labeldistance = 0.78,radius=2.2-6*size, wedgeprops=dict(width=1.5*size, edgecolor='w'))
 plt.show()
+
+st.pyplot(fig)
