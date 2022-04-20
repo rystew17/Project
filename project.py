@@ -200,8 +200,6 @@ data = pd.melt(data, id_vars=['Country\year'], var_name=['year'])
 data['value'] = data['value'].apply(pd.to_numeric, errors='coerce')
 data = data.rename(columns={'Country\year' : 'Country/Region'})
 
-data.head(5)
-
 # Initialize a grid of plots
 grid = sns.FacetGrid(data, col="Country/Region", hue="Country/Region", palette="husl",
                      col_wrap=9, height=4, aspect=1.5)
@@ -227,66 +225,4 @@ for ax in grid.axes:
     ax.text(x='2006', y=17000000, s="'05: Kyoto Protocol", horizontalalignment='left', color="indianred")
     ax.text(x='2016', y=16500000, s="'15: Paris \nAccord", horizontalalignment='left', color="indianred")
 
-# Initialize the figure style
-plt.style.use('seaborn-darkgrid')
- 
-# create a color palette
-palette = plt.get_cmap('Set1')
- 
-# multiple line plot
-num=0
-for column in data.drop('year', axis=1):
-    num+=1
- 
-    # Find the right spot on the plot
-    plt.subplot(3,3, num)
- 
-    # plot every group, but discrete
-    for v in data.drop('year', axis=1):
-        plt.plot(data['year'], data[v], marker='', color='grey', linewidth=0.6, alpha=0.3)
- 
-    # Plot the lineplot
-    plt.plot(data['year'], data[column], marker='', color=palette(num), linewidth=2.4, alpha=0.9, label=column)
- 
-    # Same limits for every chart
-    plt.xlim(0,10)
-    plt.ylim(-2,22)
- 
-    # Not ticks everywhere
-    if num in range(7) :
-        plt.tick_params(labelbottom='off')
-    if num not in [1,4,7] :
-        plt.tick_params(labelleft='off')
- 
-    # Add title
-    plt.title(column, loc='left', fontsize=12, fontweight=0, color=palette(num) )
-
-# general title
-#plt.suptitle("How the 9 students improved\nthese past few days?", fontsize=13, fontweight=0, color='black', style='italic', y=1.02)
- 
-# Axis titles
-#plt.text(0.5, 0.02, 'Time', ha='center', va='center')
-#plt.text(0.06, 0.5, 'Note', ha='center', va='center', rotation='vertical')
-
-# Show the graph
-plt.show()
-
-# Initialize the figure style
-plt.style.use('seaborn-darkgrid')
- 
-# create a color palette
-palette = plt.get_cmap('Set1')
- 
-
-# multiple line plot
-num=0
-for column in data.drop('year', axis=1):
-    num+=1
- 
-    # Find the right spot on the plot
-    plt.subplot(3,3, num)
- 
-    # plot every group, but discrete
-    for v in data.drop('year', axis=1):
-        plt.plot(data['year'], data[v], marker='', color='grey', linewidth=0.6, alpha=0.3)
 st.pyplot(grid)
