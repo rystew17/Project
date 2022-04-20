@@ -29,10 +29,11 @@ if type == "Yes":
     bar_chart = alt.Chart(data).mark_bar().encode(
         x = alt.X('c1',title = 'Country'),
         y = alt.Y('c2', title = 'Emissions')
+        color = alt.Color('reds')
     ).properties(
         width=750,
         height=500
-    ).interactive()
+    )
     st.altair_chart(bar_chart)
 else:
     filter = raw[option]
@@ -40,9 +41,10 @@ else:
     bar_chart = alt.Chart(data).mark_bar().encode(
         x = alt.X('c1',title='Countries'),
         y = alt.Y('c2',title='Emissions')
+        color = alt.Color('reds')
     ).properties(
         width=750,
         height=500
-    ).interactive()
+    )
     st.altair_chart(bar_chart)
     
