@@ -32,7 +32,7 @@ if type == "Yes":
     ).properties(
         width=750,
         height=500
-    )
+    ).interactive()
     st.altair_chart(bar_chart)
 else:
     filter = raw[option]
@@ -43,6 +43,6 @@ else:
     ).properties(
         width=750,
         height=500
-    )
+    ).interactive()
     st.altair_chart(bar_chart)
     
