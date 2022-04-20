@@ -198,7 +198,7 @@ data.head(5)
 
 # Initialize a grid of plots
 grid = sns.FacetGrid(data, col="Country/Region", hue="Country/Region", palette="husl",
-                     col_wrap=9, height=2, aspect=1.5)
+                     col_wrap=2, height=10, aspect=1.5)
 
 # Draw a horizontal line to show the starting point
 grid.refline(y=0, linestyle=":")
