@@ -58,5 +58,261 @@ else:
     )
     st.altair_chart(bar_chart)
     
+    
+    
+    from google.colab import auth
+auth.authenticate_user()
+import gspread
+
+#from oauth2client.client import GoogleCredentials  #remove this line
+#gc = gspread.authorize(GoogleCredentials.get\_application\_default()) #remove this line
+
+from google.auth import default
+creds, _ = default()
+gc = gspread.authorize(creds)
+
+# access the google sheet and load it into pandas dataframe
+#################### Do this only at the first time
+wkbook = 'https://docs.google.com/spreadsheets/d/1HiVAuTr1miXHKCmxRDu_ZspUXttlRINN3ec2CvFHg1k/edit?usp=sharing'
+
+wb = gc.open_by_url(wkbook)
+sheet = wb.worksheet('Sheet1')
+sheet_data = sheet.get_all_values()
+
+df_data = pd.DataFrame(sheet_data)
+# make row 0 into the column headers, then drop it
+df_data.columns = df_data.iloc[0]
+df_data.drop(df_data.index[0], inplace=True)
+
+# Convert all year columns to float data type
+cols = df_data.columns.drop(['Country\year', 'Non-OECD Economies'])
+df_data[cols] = df_data[cols].apply(pd.to_numeric, errors = 'coerce')
+
+# Drop Non-OECD Economies column
+data = df_data.drop(columns=['Non-OECD Economies'])
+data = pd.melt(data, id_vars=['Country\year'], var_name=['year'])
+data['value'] = data['value'].apply(pd.to_numeric, errors='coerce')
+data = data.rename(columns={'Country\year' : 'Country/Region'})
+
+data.head(5)
+
+# Initialize a grid of plots
+grid = sns.FacetGrid(data, col="Country/Region", hue="Country/Region", palette="husl",
+                     col_wrap=9, height=4, aspect=1.5)
+
+# Draw a horizontal line to show the starting point
+grid.refline(y=0, linestyle=":")
+
+# Draw a line plot to show emissions values
+grid.map(plt.plot, "year", "value", marker="o")
+
+grid.set_xticklabels(rotation=90)
+grid.set_ylabels('Greenhouse Gas Emissions \n(millions of tons of CO2)')
+
+# Adjust the arrangement of the plots
+grid.fig.tight_layout(w_pad=1)
+
+grid.refline(x = '1992', color="rosybrown", lw = 2)
+grid.refline(x = '2005', color="rosybrown", lw = 2)
+grid.refline(x = '2015', color="rosybrown", lw = 2)
+
+for ax in grid.axes:
+    ax.text(x='1993', y=17000000, s="'92: UNFCCC", horizontalalignment='left', color="indianred")
+    ax.text(x='2006', y=17000000, s="'05: Kyoto Protocol", horizontalalignment='left', color="indianred")
+    ax.text(x='2016', y=16500000, s="'15: Paris \nAccord", horizontalalignment='left', color="indianred")
+
+# Initialize the figure style
+plt.style.use('seaborn-darkgrid')
+ 
+# create a color palette
+palette = plt.get_cmap('Set1')
+ 
+# multiple line plot
+num=0
+for column in data.drop('year', axis=1):
+    num+=1
+ 
+    # Find the right spot on the plot
+    plt.subplot(3,3, num)
+ 
+    # plot every group, but discrete
+    for v in data.drop('year', axis=1):
+        plt.plot(data['year'], data[v], marker='', color='grey', linewidth=0.6, alpha=0.3)
+ 
+    # Plot the lineplot
+    plt.plot(data['year'], data[column], marker='', color=palette(num), linewidth=2.4, alpha=0.9, label=column)
+ 
+    # Same limits for every chart
+    plt.xlim(0,10)
+    plt.ylim(-2,22)
+ 
+    # Not ticks everywhere
+    if num in range(7) :
+        plt.tick_params(labelbottom='off')
+    if num not in [1,4,7] :
+        plt.tick_params(labelleft='off')
+ 
+    # Add title
+    plt.title(column, loc='left', fontsize=12, fontweight=0, color=palette(num) )
+
+# general title
+#plt.suptitle("How the 9 students improved\nthese past few days?", fontsize=13, fontweight=0, color='black', style='italic', y=1.02)
+ 
+# Axis titles
+#plt.text(0.5, 0.02, 'Time', ha='center', va='center')
+#plt.text(0.06, 0.5, 'Note', ha='center', va='center', rotation='vertical')
+
+# Show the graph
+plt.show()
+
+# Initialize the figure style
+plt.style.use('seaborn-darkgrid')
+ 
+# create a color palette
+palette = plt.get_cmap('Set1')
+ 
+
+# multiple line plot
+num=0
+for column in data.drop('year', axis=1):
+    num+=1
+ 
+    # Find the right spot on the plot
+    plt.subplot(3,3, num)
+ 
+    # plot every group, but discrete
+    for v in data.drop('year', axis=1):
+        plt.plot(data['year'], data[v], marker='', color='grey', linewidth=0.6, alpha=0.3)
+
+data10 = data.sort_values(by=['value'])
+data10 = data10[1:10] 
+data10.headfrom google.colab import auth
+auth.authenticate_user()
+import gspread
+
+#from oauth2client.client import GoogleCredentials  #remove this line
+#gc = gspread.authorize(GoogleCredentials.get\_application\_default()) #remove this line
+
+from google.auth import default
+creds, _ = default()
+gc = gspread.authorize(creds)
+
+# access the google sheet and load it into pandas dataframe
+#################### Do this only at the first time
+wkbook = 'https://docs.google.com/spreadsheets/d/1HiVAuTr1miXHKCmxRDu_ZspUXttlRINN3ec2CvFHg1k/edit?usp=sharing'
+
+wb = gc.open_by_url(wkbook)
+sheet = wb.worksheet('Sheet1')
+sheet_data = sheet.get_all_values()
+
+df_data = pd.DataFrame(sheet_data)
+# make row 0 into the column headers, then drop it
+df_data.columns = df_data.iloc[0]
+df_data.drop(df_data.index[0], inplace=True)
+
+# Convert all year columns to float data type
+cols = df_data.columns.drop(['Country\year', 'Non-OECD Economies'])
+df_data[cols] = df_data[cols].apply(pd.to_numeric, errors = 'coerce')
+
+# Drop Non-OECD Economies column
+data = df_data.drop(columns=['Non-OECD Economies'])
+data = pd.melt(data, id_vars=['Country\year'], var_name=['year'])
+data['value'] = data['value'].apply(pd.to_numeric, errors='coerce')
+data = data.rename(columns={'Country\year' : 'Country/Region'})
+
+data.head(5)
+
+# Initialize a grid of plots
+grid = sns.FacetGrid(data, col="Country/Region", hue="Country/Region", palette="husl",
+                     col_wrap=9, height=4, aspect=1.5)
+
+# Draw a horizontal line to show the starting point
+grid.refline(y=0, linestyle=":")
+
+# Draw a line plot to show emissions values
+grid.map(plt.plot, "year", "value", marker="o")
+
+grid.set_xticklabels(rotation=90)
+grid.set_ylabels('Greenhouse Gas Emissions \n(millions of tons of CO2)')
+
+# Adjust the arrangement of the plots
+grid.fig.tight_layout(w_pad=1)
+
+grid.refline(x = '1992', color="rosybrown", lw = 2)
+grid.refline(x = '2005', color="rosybrown", lw = 2)
+grid.refline(x = '2015', color="rosybrown", lw = 2)
+
+for ax in grid.axes:
+    ax.text(x='1993', y=17000000, s="'92: UNFCCC", horizontalalignment='left', color="indianred")
+    ax.text(x='2006', y=17000000, s="'05: Kyoto Protocol", horizontalalignment='left', color="indianred")
+    ax.text(x='2016', y=16500000, s="'15: Paris \nAccord", horizontalalignment='left', color="indianred")
+
+# Initialize the figure style
+plt.style.use('seaborn-darkgrid')
+ 
+# create a color palette
+palette = plt.get_cmap('Set1')
+ 
+# multiple line plot
+num=0
+for column in data.drop('year', axis=1):
+    num+=1
+ 
+    # Find the right spot on the plot
+    plt.subplot(3,3, num)
+ 
+    # plot every group, but discrete
+    for v in data.drop('year', axis=1):
+        plt.plot(data['year'], data[v], marker='', color='grey', linewidth=0.6, alpha=0.3)
+ 
+    # Plot the lineplot
+    plt.plot(data['year'], data[column], marker='', color=palette(num), linewidth=2.4, alpha=0.9, label=column)
+ 
+    # Same limits for every chart
+    plt.xlim(0,10)
+    plt.ylim(-2,22)
+ 
+    # Not ticks everywhere
+    if num in range(7) :
+        plt.tick_params(labelbottom='off')
+    if num not in [1,4,7] :
+        plt.tick_params(labelleft='off')
+ 
+    # Add title
+    plt.title(column, loc='left', fontsize=12, fontweight=0, color=palette(num) )
+
+# general title
+#plt.suptitle("How the 9 students improved\nthese past few days?", fontsize=13, fontweight=0, color='black', style='italic', y=1.02)
+ 
+# Axis titles
+#plt.text(0.5, 0.02, 'Time', ha='center', va='center')
+#plt.text(0.06, 0.5, 'Note', ha='center', va='center', rotation='vertical')
+
+# Show the graph
+plt.show()
+
+# Initialize the figure style
+plt.style.use('seaborn-darkgrid')
+ 
+# create a color palette
+palette = plt.get_cmap('Set1')
+ 
+
+# multiple line plot
+num=0
+for column in data.drop('year', axis=1):
+    num+=1
+ 
+    # Find the right spot on the plot
+    plt.subplot(3,3, num)
+ 
+    # plot every group, but discrete
+    for v in data.drop('year', axis=1):
+        plt.plot(data['year'], data[v], marker='', color='grey', linewidth=0.6, alpha=0.3)
+
+data10 = data.sort_values(by=['value'])
+data10 = data10[1:10] 
+data10.head
+    
   
     
