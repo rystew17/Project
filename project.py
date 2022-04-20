@@ -190,17 +190,7 @@ plt.show()
 st.text("Contributions based on Continents of top 5 emittors during 5 largest emission years ")
 st.pyplot(fig)
 
-df_data = pd.read_csv("https://raw.githubusercontent.com/rystew17/Project/main/CSE5544.Lab1.ClimateData%20-%20Sheet1.csv")
-df_data.columns = df_data.iloc[0]
-df_data.drop(df_data.index[0], inplace=True)
-
-# Drop Non-OECD Economies column
-data = df_data.drop(columns=['Non-OECD Economies'])
-data = pd.melt(data, id_vars=['Country\year'], var_name=['year'])
-data['value'] = data['value'].apply(pd.to_numeric, errors='coerce')
-data = data.rename(columns={'Country\year' : 'Country/Region'})
-
-data.head(5)
+data = raw
 
 # Initialize a grid of plots
 grid = sns.FacetGrid(data, col="Country/Region", hue="Country/Region", palette="husl",
