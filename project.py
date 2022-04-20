@@ -191,9 +191,6 @@ st.text("Contributions based on Continents of top 5 emittors during 5 largest em
 st.pyplot(fig)
 
 df_data = pd.read_csv("https://raw.githubusercontent.com/rystew17/Project/main/CSE5544.Lab1.ClimateData%20-%20Sheet1.csv")
-# make row 0 into the column headers, then drop it
-df_data.columns = df_data.iloc[0]
-df_data.drop(df_data.index[0], inplace=True)
 
 # Convert all year columns to float data type
 cols = df_data.columns.drop(['Country\year', 'Non-OECD Economies'])
