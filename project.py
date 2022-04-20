@@ -188,13 +188,3 @@ ax.pie(ContinentsYear5, pctdistance=0.64, autopct ='%1.1f%%',colors=colorsForCha
 plt.show()
 st.text("Contributions based on Continents of top 5 emittors during 5 largest emission years ")
 st.pyplot(fig)
-
-
-df_data2 = pd.read_csv("https://raw.githubusercontent.com/rystew17/Project/main/CSE5544.Lab1.ClimateData%20-%20Sheet1.csv")
-
-data = df_data2.columns.drop(columns=['Non-OECD Economies'])
-data = pd.melt(data, id_vars=['Country\year'], var_name=['year'])
-data['value'] = data['value'].apply(pd.to_numeric, errors='coerce')
-data = data.rename(columns={'Country\year' : 'Country/Region'})
-
-st.dataframe(data)
