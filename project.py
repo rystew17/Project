@@ -30,9 +30,10 @@ if type == "Yes":
         x = alt.X('c1',title = 'Country'),
         y = alt.Y('c2', title = 'Emissions'),
         color=alt.condition(
-            alt.datum.raw[option] == 0,  # If the year is 1810 this test returns True,
-            alt.value('orange'),     # which sets the bar orange.
-            alt.value('steelblue')   # And if it's not true it sets the bar steelblue.
+            if raw[option] == 0:  # If the year is 1810 this test returns True,
+                alt.value('orange'),     # which sets the bar orange.
+            else:
+                alt.value('steelblue')   # And if it's not true it sets the bar steelblue.
         )
     ).properties(
         width=750,
