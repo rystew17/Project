@@ -25,10 +25,16 @@ option = st.selectbox("Select year", years)
 type = st.radio("Include esitmated data?", ("Yes", "No"))
 if type == "Yes":
     filter = estimated[option]
-    data = pd.DataFrame({'c1':countries, 'c2':filter})
+    filter2 = raw[option]
+    data = pd.DataFrame({'c1':countries, 'c2':filter, 'c3':filter2})
     bar_chart = alt.Chart(data).mark_bar().encode(
         x = alt.X('c1',title = 'Country'),
-        y = alt.Y('c2', title = 'Emissions')
+        y = alt.Y('c2', title = 'Emissions'),
+        color=alt.condition(
+            alt.datum.c3 == 0,  # If the country is "US" this test returns True,
+            alt.value('red'),     # highlight a bar with red.
+            alt.value('lightgrey')   # And grey for the rest of the bars
+        )
     ).properties(
         width=750,
         height=500
@@ -39,8 +45,7 @@ else:
     data = pd.DataFrame({'c1':countries, 'c2':filter})
     bar_chart = alt.Chart(data).mark_bar().encode(
         x = alt.X('c1',title='Countries'),
-        y = alt.Y('c2',title='Emissions'),
-        color=alt.Color(scale=alt.Scale(scheme='red'))
+        y = alt.Y('c2',title='Emissions')
     ).properties(
         width=750,
         height=500
