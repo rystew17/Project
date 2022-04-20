@@ -9,8 +9,6 @@ estimated = pd.read_csv("https://raw.githubusercontent.com/rystew17/Project/main
 
 raw = pd.read_csv("https://raw.githubusercontent.com/rystew17/Project/main/Raw%20Climate%20Data%20-%20Sheet1.csv")
 
-df_data = pd.read_csv("https://raw.githubusercontent.com/rystew17/Project/main/CSE5544.Lab1.ClimateData%20-%20Sheet1.csv")
-
 years = pd.DataFrame({'c1':['1990','1991','1992','1993','1994','1995','1996','1997','1998','1999','2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018','2019']})
 
 countries = raw['Country\year']
@@ -59,7 +57,8 @@ else:
     )
     st.altair_chart(bar_chart)
     
-    
+
+df_data = pd.read_csv("https://raw.githubusercontent.com/rystew17/Project/main/CSE5544.Lab1.ClimateData%20-%20Sheet1.csv")
 df_data.columns = df_data.iloc[0]
 df_data.drop(df_data.index[0], inplace=True)
 
