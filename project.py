@@ -190,14 +190,14 @@ plt.show()
 st.text("Contributions based on Continents of top 5 emittors during 5 largest emission years ")
 st.pyplot(fig)
 
-df_data = pd.read_csv("https://raw.githubusercontent.com/rystew17/Project/main/CSE5544.Lab1.ClimateData%20-%20Sheet1.csv")
+df_data2 = pd.read_csv("https://raw.githubusercontent.com/rystew17/Project/main/CSE5544.Lab1.ClimateData%20-%20Sheet1.csv")
 
 # Convert all year columns to float data type
-cols = df_data.columns.drop(['Country\year', 'Non-OECD Economies'])
-df_data[cols] = df_data[cols].apply(pd.to_numeric, errors = 'coerce')
+cols = df_data2.columns.drop(['Country\year', 'Non-OECD Economies'])
+df_data2[cols] = df_data2[cols].apply(pd.to_numeric, errors = 'coerce')
 
 # Drop Non-OECD Economies column
-data = df_data.drop(columns=['Non-OECD Economies'])
+data = df_data2.drop(columns=['Non-OECD Economies'])
 data = pd.melt(data, id_vars=['Country\year'], var_name=['year'])
 data['value'] = data['value'].apply(pd.to_numeric, errors='coerce')
 data = data.rename(columns={'Country\year' : 'Country/Region'})
