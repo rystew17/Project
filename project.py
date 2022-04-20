@@ -191,4 +191,7 @@ st.pyplot(fig)
 
 
 df_data2 = pd.read_csv("https://raw.githubusercontent.com/rystew17/Project/main/CSE5544.Lab1.ClimateData%20-%20Sheet1.csv")
-st.dataframe(df_data2)
+
+data = df_data2.drop(columns=['Non-OECD Economies']
+                     
+st.dataframe(data)
