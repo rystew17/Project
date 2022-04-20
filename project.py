@@ -190,11 +190,17 @@ st.text("Contributions based on Continents of top 5 emittors during 5 largest em
 st.pyplot(fig)
 
 
+d# Convert all year columns to float data type
+cols = df_data.columns.drop(['Country\year', 'Non-OECD Economies'])
+df_data[cols] = df_data[cols].apply(pd.to_numeric, errors = 'coerce')
+
+# Drop Non-OECD Economies column
 data = df_data.drop(columns=['Non-OECD Economies'])
 data = pd.melt(data, id_vars=['Country\year'], var_name=['year'])
 data['value'] = data['value'].apply(pd.to_numeric, errors='coerce')
 data = data.rename(columns={'Country\year' : 'Country/Region'})
 
+data.head(5)
 
 # Initialize a grid of plots
 grid = sns.FacetGrid(data, col="Country/Region", hue="Country/Region", palette="husl",
@@ -220,5 +226,6 @@ for ax in grid.axes:
     ax.text(x='1993', y=17000000, s="'92: UNFCCC", horizontalalignment='left', color="indianred")
     ax.text(x='2006', y=17000000, s="'05: Kyoto Protocol", horizontalalignment='left', color="indianred")
     ax.text(x='2016', y=16500000, s="'15: Paris \nAccord", horizontalalignment='left', color="indianred")
+
 
 st.pyplot(grid)
