@@ -28,13 +28,7 @@ if type == "Yes":
     data = pd.DataFrame({'c1':countries, 'c2':filter})
     bar_chart = alt.Chart(data).mark_bar().encode(
         x = alt.X('c1',title = 'Country'),
-        y = alt.Y('c2', title = 'Emissions'),
-        color=alt.condition(
-            if raw[option] == 0:  # If the year is 1810 this test returns True,
-                alt.value('orange'),     # which sets the bar orange.
-            else:
-                alt.value('steelblue')   # And if it's not true it sets the bar steelblue.
-        )
+        y = alt.Y('c2', title = 'Emissions')
     ).properties(
         width=750,
         height=500
