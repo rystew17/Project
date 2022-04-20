@@ -194,10 +194,6 @@ df_data = pd.read_csv("https://raw.githubusercontent.com/rystew17/Project/main/C
 df_data.columns = df_data.iloc[0]
 df_data.drop(df_data.index[0], inplace=True)
 
-# Convert all year columns to float data type
-cols = df_data.columns.drop(['Country\year', 'Non-OECD Economies'])
-df_data[cols] = df_data[cols].apply(pd.to_numeric, errors = 'coerce')
-
 # Drop Non-OECD Economies column
 data = df_data.drop(columns=['Non-OECD Economies'])
 data = pd.melt(data, id_vars=['Country\year'], var_name=['year'])
