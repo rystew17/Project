@@ -198,7 +198,7 @@ data.head(5)
 
 # Initialize a grid of plots
 grid = sns.FacetGrid(data, col="Country/Region", hue="Country/Region", palette="husl",
-                     col_wrap=2, height=10, aspect=1.5)
+                     col_wrap=2, height=8, aspect=1.5)
 
 # Draw a horizontal line to show the starting point
 grid.refline(y=0, linestyle=":")
@@ -217,7 +217,7 @@ grid.refline(x = '2005', color="rosybrown", lw = 2)
 grid.refline(x = '2015', color="rosybrown", lw = 2)
 
 for ax in grid.axes:
-    ax.text(x='1993', y=17000000, s="'92: UNFCCC", horizontalalignment='left', color="indianred")
-    ax.text(x='2006', y=17000000, s="'05: Kyoto Protocol", horizontalalignment='left', color="indianred")
-    ax.text(x='2016', y=16500000, s="'15: Paris \nAccord", horizontalalignment='left', color="indianred")
+    ax.text(x='1993', y=10000000, s="'92: UNFCCC", horizontalalignment='left', color="indianred")
+    ax.text(x='2006', y=10000000, s="'05: Kyoto Protocol", horizontalalignment='left', color="indianred")
+    ax.text(x='2016', y=10000000, s="'15: Paris \nAccord", horizontalalignment='left', color="indianred")
 st.pyplot(grid)
